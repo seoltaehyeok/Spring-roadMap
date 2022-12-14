@@ -1,8 +1,5 @@
 package hello.core.beanfind;
 
-import hello.core.AppConfig;
-import hello.core.discount.DiscountPolish;
-import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 import org.junit.jupiter.api.Assertions;

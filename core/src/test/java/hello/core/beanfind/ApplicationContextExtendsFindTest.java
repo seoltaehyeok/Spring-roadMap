@@ -1,8 +1,8 @@
 package hello.core.beanfind;
 
-import hello.core.discount.DiscountPolish;
-import hello.core.discount.FixDiscountPolish;
-import hello.core.discount.RateDiscountPolish;
+import hello.core.discount.DiscountPolicy;
+import hello.core.discount.FixDiscountPolicy;
+import hello.core.discount.RateDiscountPolicy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,27 +22,27 @@ public class ApplicationContextExtendsFindTest {
     @DisplayName("부모 클래스로 조회 시 자식이 둘 이상이면 중복 오류가 발생")
     public void findBeanByParentTypeDuplication() {
         Assertions.assertThrows(NoUniqueBeanDefinitionException.class,
-                () -> applicationContext.getBean(DiscountPolish.class));
+                () -> applicationContext.getBean(DiscountPolicy.class));
     }
     @Test
     @DisplayName("부모 클래스로 조회 시 자식이 둘 이상이면 Bean 이름 지정")
     public void findBeanByParentTypeBeanName() {
-        DiscountPolish rateDiscountPolish = applicationContext.getBean("rateDiscountPolish", DiscountPolish.class);
-        assertThat(rateDiscountPolish).isInstanceOf(RateDiscountPolish.class);
+        DiscountPolicy rateDiscountPolicy = applicationContext.getBean("rateDiscountPolish", DiscountPolicy.class);
+        assertThat(rateDiscountPolicy).isInstanceOf(RateDiscountPolicy.class);
     }
 
     // 좋지 않은 방법
     @Test
     @DisplayName("특정 하위 타입(구체 타입)으로 조회")
     public void findBeanBySubType() {
-        RateDiscountPolish bean = applicationContext.getBean(RateDiscountPolish.class);
-        assertThat(bean).isInstanceOf(RateDiscountPolish.class);
+        RateDiscountPolicy bean = applicationContext.getBean(RateDiscountPolicy.class);
+        assertThat(bean).isInstanceOf(RateDiscountPolicy.class);
     }
 
     @Test
     @DisplayName("부모 타입으로 모두 조회하기")
     public void findAllBeanByParentType() {
-        Map<String, DiscountPolish> beansOfType = applicationContext.getBeansOfType(DiscountPolish.class);
+        Map<String, DiscountPolicy> beansOfType = applicationContext.getBeansOfType(DiscountPolicy.class);
         for (String key : beansOfType.keySet()) {
             System.out.println("key = " + key + " value = " + beansOfType.get(key));
         }
@@ -66,12 +66,12 @@ public class ApplicationContextExtendsFindTest {
     @Configuration
     public static class TestConfig {
         @Bean
-        public DiscountPolish rateDiscountPolish() {
-            return new RateDiscountPolish();
+        public DiscountPolicy rateDiscountPolish() {
+            return new RateDiscountPolicy();
         }
         @Bean
-        public DiscountPolish fixDiscountPolish() {
-            return new FixDiscountPolish();
+        public DiscountPolicy fixDiscountPolish() {
+            return new FixDiscountPolicy();
         }
     }
 

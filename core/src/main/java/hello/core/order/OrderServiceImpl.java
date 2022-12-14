@@ -1,6 +1,6 @@
 package hello.core.order;
 
-import hello.core.discount.DiscountPolish;
+import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 
@@ -12,18 +12,18 @@ public class OrderServiceImpl implements OrderService{
 
     // 주문을 위해서는 member정보와 할인정책정보(discountPolish)가 필요
     private final MemberRepository memberRepository;
-    private final DiscountPolish discountPolish;
+    private final DiscountPolicy discountPolicy;
 
 
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolish discountPolish) {
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
-        this.discountPolish = discountPolish;
+        this.discountPolicy = discountPolicy;
     }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
         Member member = memberRepository.findById(memberId);
-        int discountPrice = discountPolish.discount(member, itemPrice);
+        int discountPrice = discountPolicy.discount(member, itemPrice);
         return new Order(memberId, itemName, itemPrice, discountPrice);
     }
 }

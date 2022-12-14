@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 
-class RateDiscountPolishTest {
-    RateDiscountPolish rateDiscountPolish = new RateDiscountPolish();
+class RateDiscountPolicyTest {
+    RateDiscountPolicy rateDiscountPolicy = new RateDiscountPolicy();
 
     @Test
     @DisplayName("VIP는 10%할인이 적용되어야 한다")
@@ -18,7 +18,7 @@ class RateDiscountPolishTest {
         Member member = new Member(1L, "memberVIP", Grade.VIP);
 
         // when
-        int discount = rateDiscountPolish.discount(member, 10000);
+        int discount = rateDiscountPolicy.discount(member, 10000);
         // then
         assertThat(discount).isEqualTo(1000);
     }
@@ -29,7 +29,7 @@ class RateDiscountPolishTest {
         // given
         Member member = new Member(2L, "memberBasic", Grade.BASIC);
         // when
-        int discount = rateDiscountPolish.discount(member, 10000);
+        int discount = rateDiscountPolicy.discount(member, 10000);
         // then
         assertThat(discount).isEqualTo(0);
 
