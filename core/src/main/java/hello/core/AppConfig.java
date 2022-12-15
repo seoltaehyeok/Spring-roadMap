@@ -12,6 +12,7 @@ package hello.core;
         import org.springframework.context.annotation.Configuration;
 
 // 애플리케이션 전체를 설정하고 구성함
+// AppConfig.java와 appConfig.xml 두 개의 내용이 완전히 똑같음
 @Configuration // 설정정보
 public class AppConfig {
     // 각 메소드에 @Bean 등록을 하게 되면 Spring Container에 등록이 된다.
