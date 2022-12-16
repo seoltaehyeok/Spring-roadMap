@@ -19,16 +19,19 @@ public class AppConfig {
     @Bean
     // 역할을 다 파악할 수 있으며, private의 메서드를 호출하기 때문에 구현또한 AppConfig에서 파악할 수 있다.
     public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolish());
     }
 
