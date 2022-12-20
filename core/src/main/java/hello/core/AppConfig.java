@@ -32,11 +32,11 @@ public class AppConfig {
     @Bean
     public OrderService orderService() {
         System.out.println("call AppConfig.orderService");
-        return new OrderServiceImpl(memberRepository(), discountPolish());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean
-    public DiscountPolicy discountPolish() {
+    public DiscountPolicy discountPolicy() {
 //        return new FixDiscountPolish();
         return new RateDiscountPolicy();
     }
