@@ -12,6 +12,7 @@ import org.springframework.context.annotation.FilterType;
         // AppConfig에 있는 Bean은 수동으로 등록해야 하는데, @Configuration은 상위에 @Component가 붙어있으므로 예외처리 해준다.
         excludeFilters= @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
 )
+
 public class AutoAppConfig {
 
 }
