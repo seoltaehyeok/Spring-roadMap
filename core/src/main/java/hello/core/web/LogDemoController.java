@@ -14,13 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider;  // myLogger를 주입 받는 게 아니라 myLogger를 찾을 수 있는 것을 주입
+    private final MyLogger myLogger;  // myLogger를 주입 받는 게 아니라 myLogger를 찾을 수 있는 것을 주입
 
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request) {
         String requestURL = request.getRequestURL().toString(); // 고객이 어떤 URL 로 요청했는지 알 수 있다.
-        MyLogger myLogger = myLoggerProvider.getObject(); // 스코프가 request 인 객체 MyLogger 를 request 생성시점으로 미뤘기 때문에 오류를 막을 수 있음
+        System.out.println("myLogger.getClass() = " + myLogger.getClass());
         myLogger.setRequestURL(requestURL);
 
         myLogger.log("controller test");
